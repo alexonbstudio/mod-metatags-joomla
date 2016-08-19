@@ -1486,7 +1486,7 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="collection" priority="1" name="Accredited by Alexon Balangue">https://www.alexonbalangue.me/index.php?option=com_ars&amp;view=update&amp;task=all&amp;format=xml</server>
-		<server type="extension" priority="2" name="Module - METATAGS">http://alexonbalangue.me/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=1</server>
+		<server type="collection" priority="1" name="Accredited by Alexon Balangue">https://jupdates.alexonbalangue.me/index.php?option=com_ars&amp;view=update&amp;task=all&amp;format=xml</server>
+		<server type="extension" priority="2" name="Module - METATAGS">http://jupdates.alexonbalangue.me/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=1</server>
 	</updateservers>
 </extension>
