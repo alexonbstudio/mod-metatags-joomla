@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.5" client="site" method="upgrade">
+<extension type="module" version="3.6" client="site" method="upgrade">
 	<name>Module - Meta-Tags</name>
 	<author>Alexon Balangue</author>
-	<creationDate>14 Mai 2016</creationDate>
+	<creationDate>23 Novembre 2016</creationDate>
 	<copyright>Copyright (C) 2012-2016. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
 	<authorEmail>moi.sites@alexonbalangue.me</authorEmail>
 	<authorUrl>www.alexonbalangue.me</authorUrl>
-	<version>2.4.6</version>
+	<version>2.4.7</version>
 	<description>MOD_METATAGS_XML_DESCRIPTION</description>
 	<files>
 		<filename module="mod_metatags">mod_metatags.php</filename>

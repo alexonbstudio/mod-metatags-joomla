@@ -59,7 +59,7 @@ $docs->addScriptDeclaration('
 		"@type": "PostalAddress",
 		"streetAddress": "'.$CoB_StreetAddress.'",
 		"addressLocality": "'.$CoB_City.'",
-		"postalCode": "'.$CoB_Zipcode.'"
+		"postalCode": "'.$CoB_Zipcode.'",
 		"addressContry": "'.$CoB_Country.'"
 	},
 	"numberOfEmployees": {
