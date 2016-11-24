@@ -69,8 +69,49 @@ $docs->addScriptDeclaration('
 	}
 }', 'application/ld+json');
 }
+$docs->addScriptDeclaration('
+{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"brand": "'.$sitename.'",
+	"legalName": "'.$JsonLD_organisation_legalName.'",
+	"founder": "'.$JsonLD_organisation_founder.'",
+	"foundingDate": "'.$JsonLD_organisation_foundingDate.'",
+	"logo": "'.$JsonLD_organisation_medialogo.'",
+	"faxNumber": "'.$JsonLD_organisation_fax.'",
+	"taxID": "'.$JsonLD_organisation_taxID.'",
+	"vatID": "'.$JsonLD_organisation_vatID.'",
+	"telephone": "'.$JsonLD_organisation_telephone.'",
+	"description": "'.$desciption.'",
+	"image": "'.$JsonLD_organisation_medialogo.'",
+	"url": "'.JURI::base().'",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "'.$CoB_StreetAddress.'",
+		"addressLocality": "'.$CoB_City.'",
+		"postalCode": "'.$CoB_Zipcode.'",
+		"addressContry": "'.$CoB_Country.'"
+	},
+	"numberOfEmployees": {
+		"@type": "QuantitativeValue",
+		"minValue": "'.$JsonLD_organisation_minValue.'",
+		"maxValue": "'.$JsonLD_organisation_maxValue.'"
+	}
+}', 'application/ld+json');
 if($jsonLD_type == 'json-ld-custom'){
 	$docs->addScriptDeclaration($jsonLD_custom, 'application/ld+json');
+}
+if(!empty($custom_link_jsonjd_search)){
+	$docs->addScriptDeclaration('{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "'.$site_base.'",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "'.$custom_link_jsonjd_search.'?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}', 'application/ld+json');
 }
 /*********************[ META-TAGS SEO BASIC/ADVANCE ]************************/
 $docs->addCustomTag('<link rel="canonical" href="'.JURI::current().'">'); 

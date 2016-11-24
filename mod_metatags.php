@@ -25,6 +25,7 @@ defined('_JEXEC') or die;
 		$site_base = JURI::base();
 		//$site_all = $params->get('protocoles').'://'.$_SERVER['SERVER_NAME'].'/';
 		
+		$custom_link_jsonjd_search  = $params->get('jsonjd-search');
 		$witgetdotcom  = $params->get('witgetdotcom');
 		$audiencemeta  = $params->get('audiencemeta');
 		$blogcatalogdotcom  = $params->get('blogcatalogdotcom');

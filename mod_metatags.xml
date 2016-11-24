@@ -1173,6 +1173,16 @@
 					description="" 
 					rows="10" cols="5" 
 					filter="raw" />
+				<field 
+					type="spacer" 
+					name="schemaoption_custom" 
+					label="schema.org | Option" />
+				<field 
+					name="jsonjd-search"
+					type="text"
+					default=""
+					label="Recherche interne/intern Search"
+					description="URL custom here without 'q' and search terme, eg: https://www.site.tld/search.html" />
 			</fieldset>
 			<fieldset name="mod_meta-mobile" label="Smartphone/Mobile">
 				<field 
