@@ -3,9 +3,9 @@
 /**
  * @package	Module for Joomla!
  * @subpackage  mod_metatags
- * @version	2.4.6
+ * @version	2.4.8
  * @author	AlexonBalangue.me
- * @copyright	(C) 2012-2016 Alexon Balangue. All rights reserved.
+ * @copyright	(C) 2012-2017 Alexon Balangue. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die;
@@ -15,103 +15,17 @@ defined('_JEXEC') or die;
 <?php
 /*********************[ JSON LD ]************************/
 if($jsonLD_type == 'json-ld-person'){
-$docs->addScriptDeclaration('
-{
-	"@context": "http://schema.org",
-	"@type": "Person",
-	"honorificPrefix": "'.$JsonLD_person_honorificPrefix.'",
-	"name": "'.$JsonLD_person_name.'",
-	"birthDate": "'.$JsonLD_person_birthDate.'",
-	"faxNumber": "'.$JsonLD_person_faxNumber.'",
-	"gender": "'.$JsonLD_person_gender.'",
-	"telephone": "'.$JsonLD_person_telephone.'",
-	"description": "'.$desciption.'",
-	"image": "'.$JsonLD_person_mediaimage.'",
-	"url": "'.JURI::base().'",
-	"address": {
-		"@type": "PostalAddress",
-		"streetAddress": "'.$CoB_StreetAddress.'",
-		"addressLocality": "'.$CoB_City.'",
-		"postalCode": "'.$CoB_Zipcode.'"
-		"addressContry": "'.$CoB_Country.'"
-	}
-}', 'application/ld+json');
+$docs->addScriptDeclaration('{"@context": "http://schema.org","@type": "Person","honorificPrefix": "'.$JsonLD_person_honorificPrefix.'","name": "'.$JsonLD_person_name.'","birthDate": "'.$JsonLD_person_birthDate.'","faxNumber": "'.$JsonLD_person_faxNumber.'","gender": "'.$JsonLD_person_gender.'","telephone": "'.$JsonLD_person_telephone.'","description": "'.$desciption.'","image": "'.$JsonLD_person_mediaimage.'","url": "'.JURI::base().'","address": {"@type": "PostalAddress","streetAddress": "'.$CoB_StreetAddress.'","addressLocality": "'.$CoB_City.'","postalCode": "'.$CoB_Zipcode.'""addressContry": "'.$CoB_Country.'"}}', 'application/ld+json');
 }
 
 if($jsonLD_type == 'json-ld-organisation'){
-$docs->addScriptDeclaration('
-{
-	"@context": "http://schema.org",
-	"@type": "Organization",
-	"brand": "'.$sitename.'",
-	"legalName": "'.$JsonLD_organisation_legalName.'",
-	"founder": "'.$JsonLD_organisation_founder.'",
-	"foundingDate": "'.$JsonLD_organisation_foundingDate.'",
-	"logo": "'.$JsonLD_organisation_medialogo.'",
-	"faxNumber": "'.$JsonLD_organisation_fax.'",
-	"taxID": "'.$JsonLD_organisation_taxID.'",
-	"vatID": "'.$JsonLD_organisation_vatID.'",
-	"telephone": "'.$JsonLD_organisation_telephone.'",
-	"description": "'.$desciption.'",
-	"image": "'.$JsonLD_organisation_medialogo.'",
-	"url": "'.JURI::base().'",
-	"address": {
-		"@type": "PostalAddress",
-		"streetAddress": "'.$CoB_StreetAddress.'",
-		"addressLocality": "'.$CoB_City.'",
-		"postalCode": "'.$CoB_Zipcode.'",
-		"addressContry": "'.$CoB_Country.'"
-	},
-	"numberOfEmployees": {
-		"@type": "QuantitativeValue",
-		"minValue": "'.$JsonLD_organisation_minValue.'",
-		"maxValue": "'.$JsonLD_organisation_maxValue.'"
-	}
-}', 'application/ld+json');
-}
-$docs->addScriptDeclaration('
-{
-	"@context": "http://schema.org",
-	"@type": "Organization",
-	"brand": "'.$sitename.'",
-	"legalName": "'.$JsonLD_organisation_legalName.'",
-	"founder": "'.$JsonLD_organisation_founder.'",
-	"foundingDate": "'.$JsonLD_organisation_foundingDate.'",
-	"logo": "'.$JsonLD_organisation_medialogo.'",
-	"faxNumber": "'.$JsonLD_organisation_fax.'",
-	"taxID": "'.$JsonLD_organisation_taxID.'",
-	"vatID": "'.$JsonLD_organisation_vatID.'",
-	"telephone": "'.$JsonLD_organisation_telephone.'",
-	"description": "'.$desciption.'",
-	"image": "'.$JsonLD_organisation_medialogo.'",
-	"url": "'.JURI::base().'",
-	"address": {
-		"@type": "PostalAddress",
-		"streetAddress": "'.$CoB_StreetAddress.'",
-		"addressLocality": "'.$CoB_City.'",
-		"postalCode": "'.$CoB_Zipcode.'",
-		"addressContry": "'.$CoB_Country.'"
-	},
-	"numberOfEmployees": {
-		"@type": "QuantitativeValue",
-		"minValue": "'.$JsonLD_organisation_minValue.'",
-		"maxValue": "'.$JsonLD_organisation_maxValue.'"
-	}
-}', 'application/ld+json');
+$docs->addScriptDeclaration('{"@context": "http://schema.org", "@type": "Organization", "brand": "'.$sitename.'", "legalName": "'.$JsonLD_organisation_legalName.'", "founder": "'.$JsonLD_organisation_founder.'", "foundingDate": "'.$JsonLD_organisation_foundingDate.'", "logo": "'.$JsonLD_organisation_medialogo.'", "faxNumber": "'.$JsonLD_organisation_fax.'", "taxID": "'.$JsonLD_organisation_taxID.'", "vatID": "'.$JsonLD_organisation_vatID.'", "telephone": "'.$JsonLD_organisation_telephone.'", "description": "'.$desciption.'", "image": "'.$JsonLD_organisation_medialogo.'", "url": "'.JURI::base().'", "address": { "@type": "PostalAddress", "streetAddress": "'.$CoB_StreetAddress.'", "addressLocality": "'.$CoB_City.'", "postalCode": "'.$CoB_Zipcode.'", "addressContry": "'.$CoB_Country.'" }, "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": "'.$JsonLD_organisation_minValue.'", "maxValue": "'.$JsonLD_organisation_maxValue.'" },"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ], "opens": "09:00", "closes": "18:00" }],"contactPoint": [{ "@type": "ContactPoint", "telephone": "'.$JsonLD_organisation_telephone.'", "contactType": "customer service", "contactOption": "TollFree", "areaServed": "FR" },{ "@type": "ContactPoint", "telephone": "'.$JsonLD_organisation_telephone.'", "contactType": "emergency", "contactOption": [ "HearingImpairedSupported", "TollFree" ], "areaServed": "FR" },{ "@type": "ContactPoint", "telephone": "+33699119497", "contactType": "technical support", "contactOption": "TollFree", "areaServed": [  "GB", "FR" ], "availableLanguage": ["English","French"]}]}', 'application/ld+json');}
+$docs->addScriptDeclaration('{"@context": "http://schema.org", "@type": "Organization", "brand": "'.$sitename.'", "legalName": "'.$JsonLD_organisation_legalName.'", "founder": "'.$JsonLD_organisation_founder.'", "foundingDate": "'.$JsonLD_organisation_foundingDate.'", "logo": "'.$JsonLD_organisation_medialogo.'", "faxNumber": "'.$JsonLD_organisation_fax.'", "taxID": "'.$JsonLD_organisation_taxID.'", "vatID": "'.$JsonLD_organisation_vatID.'", "telephone": "'.$JsonLD_organisation_telephone.'", "description": "'.$desciption.'", "image": "'.$JsonLD_organisation_medialogo.'", "url": "'.JURI::base().'", "address": { "@type": "PostalAddress","streetAddress": "'.$CoB_StreetAddress.'","addressLocality": "'.$CoB_City.'","postalCode": "'.$CoB_Zipcode.'","addressContry": "'.$CoB_Country.'"},"numberOfEmployees": {"@type": "QuantitativeValue","minValue": "'.$JsonLD_organisation_minValue.'","maxValue": "'.$JsonLD_organisation_maxValue.'"}}', 'application/ld+json');
 if($jsonLD_type == 'json-ld-custom'){
 	$docs->addScriptDeclaration($jsonLD_custom, 'application/ld+json');
 }
 if(!empty($custom_link_jsonjd_search)){
-	$docs->addScriptDeclaration('{
-  "@context": "http://schema.org",
-  "@type": "WebSite",
-  "url": "'.$site_base.'",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "'.$custom_link_jsonjd_search.'?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}', 'application/ld+json');
+	$docs->addScriptDeclaration('{"@context": "http://schema.org","@type": "WebSite", "url": "'.$site_base.'", "potentialAction": {"@type": "SearchAction","target": "'.$custom_link_jsonjd_search.'?q={search_term_string}","query-input": "required name=search_term_string"}}', 'application/ld+json');
 }
 /*********************[ META-TAGS SEO BASIC/ADVANCE ]************************/
 $docs->addCustomTag('<link rel="canonical" href="'.JURI::current().'">'); 
@@ -185,7 +99,6 @@ $docs->addCustomTag('<link rel="canonical" href="'.JURI::current().'">');
 		}
 		if(!empty($Copyright)){
 			$docs->setMetaData('Copyright', $Copyright);
-			//$docs->addCustomTag( '' );
 			$docs->setMetaData('DC.rights', $Copyright);
 			$docs->setMetaData('DC.dateCopyrighted', date("Y"));
 			$docs->setMetaData('dcterms.dateCopyrighted', date("Y"));
@@ -208,13 +121,13 @@ $docs->addCustomTag('<link rel="canonical" href="'.JURI::current().'">');
 		$docs->setMetaData('ZOOMPAGEBOOST', '5');
 		$docs->setMetaData('FSLanguage', $language);
 		if(!empty($DateCreationyyyymmdd)){
-			$docs->setMetaData('Date-Creation-yyyymmdd', $DateCreationyyyymmdd);
-			$docs->setMetaData('DC.created', $DateCreationyyyymmdd);
-			$docs->setMetaData('dcterms.created ', $DateCreationyyyymmdd);
-			$docs->setMetaData( 'creation_date', $DateCreationyyyymmdd );
+			$docs->setMetaData('Date-Creation-yyyymmdd', explode('-', $DateCreationyyyymmdd));
+			$docs->setMetaData('DC.created', explode('-', $DateCreationyyyymmdd));
+			$docs->setMetaData('dcterms.created ', explode('-', $DateCreationyyyymmdd));
+			$docs->setMetaData( 'creation_date', explode('-', $DateCreationyyyymmdd) );
 		}
 		if(!empty($DateRevisionyyyymmdd)){
-			$docs->setMetaData('Date-Revision-yyyymmdd', $DateRevisionyyyymmdd);
+			$docs->setMetaData('Date-Revision-yyyymmdd', explode('-', $DateRevisionyyyymmdd));
 		}
 		if(!empty($Category)){
 			$docs->setMetaData('Category', $Category);
@@ -612,14 +525,7 @@ $docs->addCustomTag('<link rel="canonical" href="'.JURI::current().'">');
 
 /*********************[ Tynt How Copy/Past your website? ]************************/
 		if(!empty($Tynpush)){
-			$docs->addCustomTag( '<!-- BEGIN Tynt Script -->
-<script type="text/javascript">
-if(document.location.protocol==\'http:\'){
- var Tynt=Tynt||[];Tynt.push(\''.$Tynpush.'\');
- (function(){var s=document.createElement(\'script\');s.async="async";s.type="text/javascript";s.src=\'http://tcr.tynt.com/ti.js\';var h=document.getElementsByTagName(\'script\')[0];h.parentNode.insertBefore(s,h);})();
-}
-</script>
-<!-- END Tynt Script -->' );
+			$docs->addCustomTag( '<script type="text/javascript">if(document.location.protocol==\'http:\'){ var Tynt=Tynt||[];Tynt.push(\''.$Tynpush.'\'); (function(){var s=document.createElement(\'script\');s.async="async";s.type="text/javascript";s.src=\'http://tcr.tynt.com/ti.js\';var h=document.getElementsByTagName(\'script\')[0];h.parentNode.insertBefore(s,h);})();}</script>' );
 
 		}
 /*********************[ AUTRES/LINK ]************************/
@@ -635,7 +541,7 @@ $docs->addCustomTag( '<link rel="meta" type="application/rdf+xml" href="'.JURI::
 //JVersion::getShortVersion()
 $jversion = new JVersion();
 if( version_compare( $jversion->getShortVersion(), '3.1', 'ge' ) ):
-   $jversion_out = '3.5';
+   $jversion_out = '3.7';
 else:
    $jversion_out = '2.5';
 endif;
@@ -674,34 +580,13 @@ $docs->setMetaData('shareaholic:joomla_version', $jversion_out);
 /*********************[ AUTRES analystic ]************************/
 
 if(!empty($gganalystic_UA)){ 
-	$docs->addCustomTag('<script>
-	  (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,\'script\',\'//www.google-analytics.com/analytics.js\',\'ga\');
-
-	  ga(\'create\', \''.$gganalystic_UA.'\', \''.$gganalystic.'\');
-	  ga(\'send\', \'pageview\');
-
-	</script>
-	<link rel="shortlink" href="'.JURI::base().'">'); 
+	$docs->addCustomTag('<script>{function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,\'script\',\'//www.google-analytics.com/analytics.js\',\'ga\'); ga(\'create\', \''.$gganalystic_UA.'\', \''.$gganalystic.'\'); ga(\'send\', \'pageview\');</script>	<link rel="shortlink" href="'.JURI::base().'">'); 
 }
 
 
 if(!empty($optimizelyKEYjs)){ $docs->addCustomTag('<script src="//cdn.optimizely.com/js/'.$optimizelyKEYjs.'.js"></script>'); }
 
-if(!empty($visualwebsiteoptimizer)){ $docs->addCustomTag('
-<!-- Start Visual Website Optimizer Asynchronous Code -->
-<script type=\'text/javascript\'>
-var _vwo_code=(function(){
-var account_id='.$visualwebsiteoptimizer.',
-settings_tolerance=2000,
-library_tolerance=2500,
-use_existing_jquery=false,
-// DO NOT EDIT BELOW THIS LINE
-f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById(\'_vis_opt_path_hides\');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement(\'script\');b.src=a;b.type=\'text/javascript\';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName(\'head\')[0].appendChild(b);},init:function(){settings_timer=setTimeout(\'_vwo_code.finish()\',settings_tolerance);this.load(\'//dev.visualwebsiteoptimizer.com/j.php?a=\'+account_id+\'&amp;u=\'+encodeURIComponent(d.URL)+\'&amp;r=\'+Math.random());var a=d.createElement(\'style\'),b=\'body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}\',h=d.getElementsByTagName(\'head\')[0];a.setAttribute(\'id\',\'_vis_opt_path_hides\');a.setAttribute(\'type\',\'text/css\');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
-</script>
-<!-- End Visual Website Optimizer Asynchronous Code -->');
+if(!empty($visualwebsiteoptimizer)){ $docs->addCustomTag('<script type=\'text/javascript\'>var _vwo_code=(function(){var account_id='.$visualwebsiteoptimizer.',settings_tolerance=2000,library_tolerance=2500,use_existing_jquery=false,f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById(\'_vis_opt_path_hides\');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement(\'script\');b.src=a;b.type=\'text/javascript\';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName(\'head\')[0].appendChild(b);},init:function(){settings_timer=setTimeout(\'_vwo_code.finish()\',settings_tolerance);this.load(\'//dev.visualwebsiteoptimizer.com/j.php?a=\'+account_id+\'&amp;u=\'+encodeURIComponent(d.URL)+\'&amp;r=\'+Math.random());var a=d.createElement(\'style\'),b=\'body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}\',h=d.getElementsByTagName(\'head\')[0];a.setAttribute(\'id\',\'_vis_opt_path_hides\');a.setAttribute(\'type\',\'text/css\');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();</script>');
 }
 //PIWIK
 if($show_piwik == 1){
@@ -819,23 +704,7 @@ if(!empty($backlinks_frontendf)){ echo $backlinks_frontendf; }
 $finale_xiti = html_entity_decode($sitename);
 $finale_xiti = preg_replace('/\s/', '_', $finale_xiti);
 if(!empty($num_s_xiti)){
-echo '<a href="http://www.xiti.com/xiti.asp?s='.$num_s_xiti.'" title="WebAnalytics" target="_top">
-<script type="text/javascript">
-<!--
-Xt_param = \'s='.$num_s_xiti.'&amp;p='.$finale_xiti.'\';
-try {Xt_r = top.document.referrer;}
-catch(e) {Xt_r = document.referrer; }
-Xt_h = new Date();
-Xt_i = \'<img width="39" height="25" border="0" alt="XITI to Ainternet" \';
-Xt_i += \'src="http://logv4.xiti.com/hit.xiti?\'+Xt_param;
-Xt_i += \'&amp;hl=\'+Xt_h.getHours()+\'x\'+Xt_h.getMinutes()+\'x\'+Xt_h.getSeconds();
-if(parseFloat(navigator.appVersion)>=4)
-{Xt_s=screen;Xt_i+=\'&amp;r=\'+Xt_s.width+\'x\'+Xt_s.height+\'x\'+Xt_s.pixelDepth+\'x\'+Xt_s.colorDepth;}
-document.write(Xt_i+\'&amp;ref=\'+Xt_r.replace(/[<>"]/g, \'\').replace(/&amp;/g, \'$\')+\'" title="Internet Audience">\');
-//-->
-</script>
-<noscript>
-Mesure d\'audience ROI statistique webanalytics par <img width="39" height="25" src="http://logv4.xiti.com/hit.xiti?s='.$num_s_xiti.'&amp;p='.$finale_xiti.'" alt="WebAnalytics">
+echo '<a href="http://www.xiti.com/xiti.asp?s='.$num_s_xiti.'" title="WebAnalytics" target="_top"><script type="text/javascript">Xt_param = \'s='.$num_s_xiti.'&amp;p='.$finale_xiti.'\';try {Xt_r = top.document.referrer;}catch(e) {Xt_r = document.referrer; }Xt_h = new Date();Xt_i = \'<img width="39" height="25" border="0" alt="XITI to Ainternet" \';Xt_i += \'src="http://logv4.xiti.com/hit.xiti?\'+Xt_param;Xt_i += \'&amp;hl=\'+Xt_h.getHours()+\'x\'+Xt_h.getMinutes()+\'x\'+Xt_h.getSeconds();if(parseFloat(navigator.appVersion)>=4){Xt_s=screen;Xt_i+=\'&amp;r=\'+Xt_s.width+\'x\'+Xt_s.height+\'x\'+Xt_s.pixelDepth+\'x\'+Xt_s.colorDepth;}document.write(Xt_i+\'&amp;ref=\'+Xt_r.replace(/[<>"]/g, \'\').replace(/&amp;/g, \'$\')+\'" title="Internet Audience">\');//--></script><noscript>Mesure d\'audience ROI statistique webanalytics par <img width="39" height="25" src="http://logv4.xiti.com/hit.xiti?s='.$num_s_xiti.'&amp;p='.$finale_xiti.'" alt="WebAnalytics">
 </noscript></a>';
 }
 
@@ -884,9 +753,7 @@ if($freewebsubmission_backlinks == 1){
 	echo '<a href="http://www.freewebsubmission.com"><img src="http://www.freewebsubmission.com/images/fwsbutton11.gif" width="88" height="31" border="0" alt="Submit Your Site To The Web\'s Top 50 Search Engines for Free!"></a> ';
 }
 if($addme_backlinks == 1){
-	echo '<!-- START OF ADDME LINK -->
-<a href="http://www.addme.com/submission/free-submission-start.php">Search Engine Submission - AddMe</a> 
-<!-- END OF ADDME LINK -->';
+	echo '<a href="http://www.addme.com/submission/free-submission-start.php">Search Engine Submission - AddMe</a> ';
 }
 if(!empty($hypersmash_idsite)){
 	echo '<a href="http://www.hypersmash.com/dreamhost/" id="'.$hypersmash_idsite.'">Read more</a>';
@@ -912,37 +779,10 @@ if($oobdoo_backlink == 1){
 ALT="ooBdoo" BORDER="0" WIDTH="80" height="38"ALIGN="TOP"></A>';
 }
 if(!empty($quantcast_backlink)){
-	echo '<!-- Quantcast Tag -->
-<script type="text/javascript">
-var _qevents = _qevents || [];
-
-(function() {
-var elem = document.createElement(\'script\');
-elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-elem.async = true;
-elem.type = "text/javascript";
-var scpt = document.getElementsByTagName(\'script\')[0];
-scpt.parentNode.insertBefore(elem, scpt);
-})();
-
-_qevents.push({
-qacct:"p-'.$quantcast_backlink.'"
-});
-</script>
-
-<noscript>
-<div style="display:none;">
-<img src="//pixel.quantserve.com/pixel/p-'.$quantcast_backlink.'.gif" border="0" height="1" width="1" alt="Quantcast"/>
-</div>
-</noscript>
-<!-- End Quantcast tag -->';
+	echo '<script type="text/javascript">var _qevents = _qevents || [];(function() {var elem = document.createElement(\'script\');elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";elem.async = true;elem.type = "text/javascript";var scpt = document.getElementsByTagName(\'script\')[0];scpt.parentNode.insertBefore(elem, scpt);})();_qevents.push({qacct:"p-'.$quantcast_backlink.'"});</script><noscript><div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-'.$quantcast_backlink.'.gif" border="0" height="1" width="1" alt="Quantcast"/></div></noscript>';
 }
 if(!empty($AddShoppers_backlink)){
-	echo '<script type="text/javascript">
-var js = document.createElement(\'script\'); js.type = \'text/javascript\'; js.async = true; js.id = \'AddShoppers\';
-js.src = (\'https:\' == document.location.protocol ? \'https://shop.pe/widget/\' : \'http://cdn.shop.pe/widget/\') + \'widget_async.js#'.$AddShoppers_backlink.'\';
-document.getElementsByTagName("head")[0].appendChild(js);
-</script>';
+	echo '<script type="text/javascript">var js = document.createElement(\'script\'); js.type = \'text/javascript\'; js.async = true; js.id = \'AddShoppers\';js.src = (\'https:\' == document.location.protocol ? \'https://shop.pe/widget/\' : \'http://cdn.shop.pe/widget/\') + \'widget_async.js#'.$AddShoppers_backlink.'\';document.getElementsByTagName("head")[0].appendChild(js);</script>';
 }
 
 ?>
