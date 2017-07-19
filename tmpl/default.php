@@ -601,7 +601,7 @@ echo '<img src="https://'.$urldomain_piwik_interne.'piwik.php?idsite='.$idsite_p
 }
 /*********************[ AUTRES Smartphone/Mobile ]************************/
 if($show_mobile == 1){
-	$docs->setMetaData('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
+	$docs->setMetaData('viewport', 'width=device-width, initial-scale=1, shrink-to-fit=no');
 	$docs->setMetaData('HandheldFriendly', 'true');
 	$docs->setMetaData('apple-mobile-web-app-capable', 'YES');
 	$docs->setMetaData('mobileoptimized', '480');
