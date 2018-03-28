@@ -15,12 +15,115 @@ defined('_JEXEC') or die;
 <?php
 /*********************[ JSON LD ]************************/
 if($jsonLD_type == 'json-ld-person'){
-$docs->addScriptDeclaration('{"@context": "http://schema.org","@type": "Person","honorificPrefix": "'.$JsonLD_person_honorificPrefix.'","name": "'.$JsonLD_person_name.'","birthDate": "'.$JsonLD_person_birthDate.'","faxNumber": "'.$JsonLD_person_faxNumber.'","gender": "'.$JsonLD_person_gender.'","telephone": "'.$JsonLD_person_telephone.'","description": "'.$desciption.'","image": "'.$JsonLD_person_mediaimage.'","url": "'.JURI::base().'","address": {"@type": "PostalAddress","streetAddress": "'.$CoB_StreetAddress.'","addressLocality": "'.$CoB_City.'","postalCode": "'.$CoB_Zipcode.'""addressContry": "'.$CoB_Country.'"}}', 'application/ld+json');
+$docs->addScriptDeclaration('{
+		"@context": "http://schema.org",
+		"@type": "Person",
+		"honorificPrefix": "'.$JsonLD_person_honorificPrefix.'",
+		"name": "'.$JsonLD_person_name.'",
+		"birthDate": "'.$JsonLD_person_birthDate.'",
+		"faxNumber": "'.$JsonLD_person_faxNumber.'",
+		"gender": "'.$JsonLD_person_gender.'",
+		"telephone": "'.$JsonLD_person_telephone.'",
+		"description": "'.$desciption.'",
+		"image": "'.$JsonLD_person_mediaimage.'",
+		"url": "'.JURI::base().'",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "'.$CoB_StreetAddress.'",
+			"addressLocality": "'.$CoB_City.'",
+			"postalCode": "'.$CoB_Zipcode.'",
+			"addressContry": "'.$CoB_Country.'"
+		}
+	}', 'application/ld+json');
 }
 
 if($jsonLD_type == 'json-ld-organisation'){
-$docs->addScriptDeclaration('{"@context": "http://schema.org", "@type": "Organization", "brand": "'.$sitename.'", "legalName": "'.$JsonLD_organisation_legalName.'", "founder": "'.$JsonLD_organisation_founder.'", "foundingDate": "'.$JsonLD_organisation_foundingDate.'", "logo": "'.$JsonLD_organisation_medialogo.'", "faxNumber": "'.$JsonLD_organisation_fax.'", "taxID": "'.$JsonLD_organisation_taxID.'", "vatID": "'.$JsonLD_organisation_vatID.'", "telephone": "'.$JsonLD_organisation_telephone.'", "description": "'.$desciption.'", "image": "'.$JsonLD_organisation_medialogo.'", "url": "'.JURI::base().'", "address": { "@type": "PostalAddress", "streetAddress": "'.$CoB_StreetAddress.'", "addressLocality": "'.$CoB_City.'", "postalCode": "'.$CoB_Zipcode.'", "addressContry": "'.$CoB_Country.'" }, "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": "'.$JsonLD_organisation_minValue.'", "maxValue": "'.$JsonLD_organisation_maxValue.'" },"openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "dayOfWeek": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ], "opens": "09:00", "closes": "18:00" }],"contactPoint": [{ "@type": "ContactPoint", "telephone": "'.$JsonLD_organisation_telephone.'", "contactType": "customer service", "contactOption": "TollFree", "areaServed": "FR" },{ "@type": "ContactPoint", "telephone": "'.$JsonLD_organisation_telephone.'", "contactType": "emergency", "contactOption": [ "HearingImpairedSupported", "TollFree" ], "areaServed": "FR" },{ "@type": "ContactPoint", "telephone": "+33699119497", "contactType": "technical support", "contactOption": "TollFree", "areaServed": [  "GB", "FR" ], "availableLanguage": ["English","French"]}]}', 'application/ld+json');}
-$docs->addScriptDeclaration('{"@context": "http://schema.org", "@type": "Organization", "brand": "'.$sitename.'", "legalName": "'.$JsonLD_organisation_legalName.'", "founder": "'.$JsonLD_organisation_founder.'", "foundingDate": "'.$JsonLD_organisation_foundingDate.'", "logo": "'.$JsonLD_organisation_medialogo.'", "faxNumber": "'.$JsonLD_organisation_fax.'", "taxID": "'.$JsonLD_organisation_taxID.'", "vatID": "'.$JsonLD_organisation_vatID.'", "telephone": "'.$JsonLD_organisation_telephone.'", "description": "'.$desciption.'", "image": "'.$JsonLD_organisation_medialogo.'", "url": "'.JURI::base().'", "address": { "@type": "PostalAddress","streetAddress": "'.$CoB_StreetAddress.'","addressLocality": "'.$CoB_City.'","postalCode": "'.$CoB_Zipcode.'","addressContry": "'.$CoB_Country.'"},"numberOfEmployees": {"@type": "QuantitativeValue","minValue": "'.$JsonLD_organisation_minValue.'","maxValue": "'.$JsonLD_organisation_maxValue.'"}}', 'application/ld+json');
+$docs->addScriptDeclaration('{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"brand": "'.$sitename.'",
+	"legalName": "'.$JsonLD_organisation_legalName.'",
+	"founder": "'.$JsonLD_organisation_founder.'",
+	"foundingDate": "'.$JsonLD_organisation_foundingDate.'",
+	"logo": "'.$JsonLD_organisation_medialogo.'",
+	"faxNumber": "'.$JsonLD_organisation_fax.'",
+	"taxID": "'.$JsonLD_organisation_taxID.'",
+	"vatID": "'.$JsonLD_organisation_vatID.'",
+	"telephone": "'.$JsonLD_organisation_telephone.'",
+	"description": "'.$desciption.'",
+	"image": "'.$JsonLD_organisation_medialogo.'",
+	"url": "'.JURI::base().'",
+	"address": { 
+		"@type": "PostalAddress",
+		"streetAddress": "'.$CoB_StreetAddress.'",
+		"addressLocality": "'.$CoB_City.'",
+		"postalCode": "'.$CoB_Zipcode.'",
+		"addressContry": "'.$CoB_Country.'" 
+	},
+	"numberOfEmployees": { 
+		"@type": "QuantitativeValue",
+		"minValue": "'.$JsonLD_organisation_minValue.'",
+		"maxValue": "'.$JsonLD_organisation_maxValue.'"
+	},
+	"openingHoursSpecification": [ { 
+		"@type": "OpeningHoursSpecification",
+		"dayOfWeek": [
+			"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" 
+		],
+		"opens": "09:00",
+		"closes": "18:00" 
+	}],
+	"contactPoint": [{ 
+		"@type": "ContactPoint", 
+		"telephone": "'.$JsonLD_organisation_telephone.'",
+		"contactType": "customer service",
+		"contactOption": "TollFree",
+		"areaServed": "FR" 
+	},{
+		"@type": "ContactPoint",
+		"telephone": "'.$JsonLD_organisation_telephone.'",
+		"contactType": "emergency",
+		"contactOption": [ 
+			"HearingImpairedSupported", "TollFree" 
+		], 
+		"areaServed": "FR" 
+	},{ 
+		"@type": "ContactPoint", 
+		"telephone": "+33699119497", 
+		"contactType": "technical support", 
+		"contactOption": "TollFree", 
+		"areaServed": [  "GB", "FR" ], 
+		"availableLanguage": ["English","French"]
+	}]
+}', 'application/ld+json');}
+$docs->addScriptDeclaration('{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"brand": "'.$sitename.'",
+	"legalName": "'.$JsonLD_organisation_legalName.'",
+	"founder": "'.$JsonLD_organisation_founder.'",
+	"foundingDate": "'.$JsonLD_organisation_foundingDate.'",
+	"logo": "'.$JsonLD_organisation_medialogo.'",
+	"faxNumber": "'.$JsonLD_organisation_fax.'",
+	"taxID": "'.$JsonLD_organisation_taxID.'",
+	"vatID": "'.$JsonLD_organisation_vatID.'",
+	"telephone": "'.$JsonLD_organisation_telephone.'",
+	"description": "'.$desciption.'",
+	"image": "'.$JsonLD_organisation_medialogo.'",
+	"url": "'.JURI::base().'",
+	"address": { 
+		"@type": "PostalAddress",
+		"streetAddress": "'.$CoB_StreetAddress.'",
+		"addressLocality": "'.$CoB_City.'",
+		"postalCode": "'.$CoB_Zipcode.'",
+		"addressContry": "'.$CoB_Country.'"
+	},
+	"numberOfEmployees": {
+		"@type": "QuantitativeValue",
+		"minValue": "'.$JsonLD_organisation_minValue.'",
+		"maxValue": "'.$JsonLD_organisation_maxValue.'"
+	}
+}', 'application/ld+json');
 if($jsonLD_type == 'json-ld-custom'){
 	$docs->addScriptDeclaration($jsonLD_custom, 'application/ld+json');
 }
@@ -541,7 +644,7 @@ $docs->addCustomTag( '<link rel="meta" type="application/rdf+xml" href="'.JURI::
 //JVersion::getShortVersion()
 $jversion = new JVersion();
 if( version_compare( $jversion->getShortVersion(), '3.1', 'ge' ) ):
-   $jversion_out = '3.7';
+   $jversion_out = '3.8';
 else:
    $jversion_out = '2.5';
 endif;
@@ -785,4 +888,18 @@ if(!empty($AddShoppers_backlink)){
 	echo '<script type="text/javascript">var js = document.createElement(\'script\'); js.type = \'text/javascript\'; js.async = true; js.id = \'AddShoppers\';js.src = (\'https:\' == document.location.protocol ? \'https://shop.pe/widget/\' : \'http://cdn.shop.pe/widget/\') + \'widget_async.js#'.$AddShoppers_backlink.'\';document.getElementsByTagName("head")[0].appendChild(js);</script>';
 }
 
+//////////////////////////////////////////////////////////
+if(!empty($gtagsmanager)){
+	$docs->addCustomTag('<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({\'gtm.start\':
+new Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!=\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=
+\'https://www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,\'script\',\'dataLayer\',\''.$gtagsmanager.'\');</script>
+<!-- End Google Tag Manager -->');
+	echo '<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id='.$gtagsmanager.'"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->';
+}
 ?>

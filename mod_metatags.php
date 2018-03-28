@@ -231,5 +231,8 @@ defined('_JEXEC') or die;
 		$Twitterdnt  = $params->get('witterdnt');
 		$Twittercsp  = $params->get('wittercsp');
 		
+		/*Business*/
+		$gtagsmanager  = $params->get('gtagsmanager');
+		
 		
 require JModuleHelper::getLayoutPath('mod_metatags', $params->get('layout', 'default'));
