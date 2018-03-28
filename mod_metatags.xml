@@ -99,7 +99,7 @@
 					label="JFIELD_MOD_METATAGS_EXPIRES_LABEL"
 					description="JFIELD_MOD_METATAGS_EXPIRES_DESC" />
 				<field name="Date-Creation-yyyymmdd" type="calendar" default="2000-02-01" label="JFIELD_MOD_METATAGS_DATECREATESITE_LABEL" description="JFIELD_MOD_METATAGS_DATECREATESITE_DESC" format="%Y-%m-%d" />
-				<field name="Date-Revision-yyyymmdd" type="calendar" default="2000-03-01" label="JFIELD_MOD_METATAGS_DATEUPDATESITE_LABEL" description="JFIELD_MOD_METATAGS_DATEUPDATESITE_DESC" format="%Y%-m%-d" />
+				<field name="Date-Revision-yyyymmdd" type="calendar" default="2000-03-01" label="JFIELD_MOD_METATAGS_DATEUPDATESITE_LABEL" description="JFIELD_MOD_METATAGS_DATEUPDATESITE_DESC" format="%Y-%m-%d" />
 				<field 
 					name="classification-meta"
 					type="list"
