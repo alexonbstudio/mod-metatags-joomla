@@ -2,93 +2,49 @@
 /**
  * @package	Module for Joomla!
  * @subpackage  mod_metatags
- * @version	2.4.6
+ * @version	4.3
  * @author	AlexonBalangue.me
- * @copyright	(C) 2012-2016 Alexon Balangue. All rights reserved.
+ * @copyright	(C) 2012-2019 Alexon Balangue. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 
 defined('_JEXEC') or die;
+
 //webutation-site-verification
 	$app = JFactory::getApplication();
 	$docs = JFactory::getDocument();
-	$docs->setGenerator('');//remove generator
-		$sitename = $app->getCfg('sitename');
+	$gconfigs = JFactory::getConfig();
+	$docs->setGenerator(null);//remove generator
+		$sitename = $gconfigs->get('sitename');
+		$titles = htmlspecialchars($docs->getTitle(), ENT_COMPAT, 'UTF-8');
 		$site_url = JURI::current();
-		$Keyword = $app->getCfg('MetaKeys');
-		$newsKeyword = /****$app->getCfg('MetaKeys');***/ $params->get('news-keywords');
+		$Keyword = htmlspecialchars($gconfigs->get('MetaKeys'), ENT_COMPAT, 'UTF-8');
 		$auteur = $params->get('author-userid-website'); //$app->getCfg('MetaAuthor');
-		$desciption = $app->getCfg('MetaDesc');
-		
-		$language  = $docs->language;
+		$desciption = htmlspecialchars($docs->getDescription(), ENT_COMPAT, 'UTF-8');
+	
+		$language  = substr($docs->language, 0, 2); #JFactory::getLanguage()->getTag()
 		$site_root = JURI::root();
 		$site_base = JURI::base();
-		//$site_all = $params->get('protocoles').'://'.$_SERVER['SERVER_NAME'].'/';
-		
-		$custom_link_jsonjd_search  = $params->get('jsonjd-search');
-		$witgetdotcom  = $params->get('witgetdotcom');
-		$audiencemeta  = $params->get('audiencemeta');
-		$blogcatalogdotcom  = $params->get('blogcatalogdotcom');
-		$googlekey  = $params->get('googlekey');
-		$Pinterestkey  = $params->get('Pinterestkey');
-		$pingdomkey  = $params->get('pingdomkey');
-		$rights_standard  = $params->get('rights-standard');
-		$startver  = $params->get('startver');
-		$yandexkey  = $params->get('yandexkey');
-		$bingkey    = $params->get('bingkey');
-		$alexakey   = $params->get('alexakey');
-		$detectify_verification   = $params->get('detectify-verification');
-		$format_detection_SafariiOS   = $params->get('format_detection_SafariiOS');
 
-		$RevisitAfter   = $params->get('Revisit-After');
-		$Rating   = $params->get('Rating');
-		$Distribution   = $params->get('Distribution');
-		$Location   = $params->get('Location');
-		$Copyright   = '(c) '.date('Y').' '.$_SERVER['SERVER_NAME'];
-		$Publisher   = $params->get('Publisher');
-		$DateCreationyyyymmdd   = $params->get('Date-Creation-yyyymmdd');
-		$DateRevisionyyyymmdd   = $params->get('Date-Revision-yyyymmdd');
-		$Category   = $params->get('Category');
-		
-		
-		$georegion   = $params->get('georegion');
-		$geoplacename   = $params->get('geoplacename');
-		$geoposition   = $params->get('geoposition');
-		$ICBM   = $params->get('ICBM');
-		
-		
+		$custom_link_jsonjd_search  = $params->get('jsonjd-search');
+
+		$DJsonLDs   = $params->get('date-jsonld');
+		$JsonLD_opens   = $params->get('JsonLD-opens');
+		$JsonLD_close   = $params->get('JsonLD-close');
+
 		$robots   = $params->get('robots');
 		$CSP   = $params->get('Content-Security-Policy');
 		$urlgooglechrome_webapps   = $params->get('urlgooglechrome-webapps');
-		$mybitcoin_account   = $params->get('mybitcoin-account');
-		$blazerr_ssl   = $params->get('blazerr_ssl');
-		
-		$wotverification   = $params->get('wot-verification');
-		$sefewebnorton   = $params->get('sefeweb-norton');
-		$bitly   = $params->get('bitly-verification');
-		$okpays   = $params->get('okpays-verification');
-		$myblogguestkey = $params->get('myblogguestkey');
-		$baidukey = $params->get('baidukey');
-		$majestickey = $params->get('majestickey');
-		
+
 		$expires   = $params->get('expires');
 		$logoimg   = $site_root.$params->get('logoimg');
-		$classification   = $params->get('classification-meta');
 		$twittercards   = $params->get('choosetwitter_card');
 		
-		$Tynpush   = $params->get('Tynpush');
 		$backlinks_frontendh   = $params->get('backlinks-frontendh');
 		$backlinks_frontendf   = $params->get('backlinks-frontendf');
 		$jsonLD_type   = $params->get('json-ld-TYPE');
 		$jsonLD_custom   = $params->get('schema_custom');
-		
-		$freewebsubmission_backlinks   = $params->get('freewebsubmission_backlink');
-		$addme_backlinks   = $params->get('addme_backlink');
-		$sonicrun_backlinks   = $params->get('sonicrun_backlink');
-		$addpro_backlinks   = $params->get('addpro_backlink');
-		$hypersmash_idsite   = $params->get('hypersmash_idsite');
-		$ineedhits_idsite   = $params->get('ineedhits_idsite');
-		
+
 		$Twittersite   = $params->get('websitetwitter');
 		$TwitterCreate   = $params->get('creatortwitter');
 		$TwitterDev  = $params->get('developpertwitter');
@@ -120,85 +76,9 @@ defined('_JEXEC') or die;
 		$fbapp_idopgme = $params->get('fbappid');
 		$fbapp_admin = $params->get('fbadmins');
 		$fb_profils = $params->get('fbprofils_id');
-		/**Contact meta**/
-		$CoB_Name = $params->get('Co-B_Name');
-		$CoB_Organization = $params->get('Co-B_Organization');
-		$CoB_StreetAddress = $params->get('Co-B_StreetAddress');
-		$CoB_Zipcode = $params->get('Co-B_Zipcode');
-		$CoB_City = $params->get('Co-B_City');
-		$CoB_Country = $params->get('Co-B_Country');
-		$CoB_PhoneNumber = $params->get('Co-B_PhoneNumber');
-		$CoB_FaxNumber = $params->get('Co-B_FaxNumber');
-		$CoB_NetworkAddress = $params->get('Co-B_NetworkAddress');
 		/**autres**/
-		$linkstantkey = $params->get('linkstant');
-		$googletranslatecustomization = $params->get('googletranslatecustomization');
-		$gganalystic = $params->get('analyse-domainname');
 		$gganalystic_UA = $params->get('analyse-UA');
-		$optimizelyKEYjs = $params->get('optimizelyKEYjs');
-		$visualwebsiteoptimizer = $params->get('visualwebsiteoptimizers-idaccount');
-		/**Mobile**/
-		$logoimg_mobile_startup = $site_root.$params->get('mobile-icons-startup');
-		$logoimg_mobile = $site_root.$params->get('mobile-icons-logo');
-		$logoimg_mobile72x72 = $site_root.$params->get('mobile-icons-logo72x72');
-		$logoimg_mobile114x114 = $site_root.$params->get('mobile-icons-logo114x114');
-		$show_mobile_device = $params->get('show_device');
-		$myAffiliateDataapps = $params->get('myAffiliateDataapps-APPLE');
-		/**Pinned Website windows 7**/
-		$JltaskIcons_final = $params->get('pinned7-icons');
-		$JltaskNames_1 = $params->get('pinned7-ltaskNames-1');
-		$JltaskNames_2 = $params->get('pinned7-ltaskNames-2');
-		$JltaskNames_3 = $params->get('pinned7-ltaskNames-3');
-		$JltaskNames_4 = $params->get('pinned7-ltaskNames-4');
-		$JltaskNames_5 = $params->get('pinned7-ltaskNames-5');
-		$JltaskNames_6 = $params->get('pinned7-ltaskNames-6');
-		$JltaskNames_7 = $params->get('pinned7-ltaskNames-7');
-		$JltaskNames_8 = $params->get('pinned7-ltaskNames-8');
-		$JltaskNames_9 = $params->get('pinned7-ltaskNames-9');
-		$JltaskPages_1 = $params->get('pinned7-ltaskPages-1');
-		$JltaskPages_2 = $params->get('pinned7-ltaskPages-2');
-		$JltaskPages_3 = $params->get('pinned7-ltaskPages-3');
-		$JltaskPages_4 = $params->get('pinned7-ltaskPages-4');
-		$JltaskPages_5 = $params->get('pinned7-ltaskPages-5');
-		$JltaskPages_6 = $params->get('pinned7-ltaskPages-6');
-		$JltaskPages_7 = $params->get('pinned7-ltaskPages-7');
-		$JltaskPages_8 = $params->get('pinned7-ltaskPages-8');
-		$JltaskPages_9 = $params->get('pinned7-ltaskPages-9');
 		
-		/**Pinned Website windows 8**/
-		$pinned8_color = $params->get('pinned8-color');
-		$pinned8_navbutton_color = $params->get('pinned8-navbutton-color');
-		$pinned8_square70x70logo = $site_root.$params->get('pinned8-square70x70logo');
-		$pinned8_square150x150logo = $site_root.$params->get('pinned8-square150x150logo');
-		$pinned8_square144x144logo = $site_root.$params->get('pinned8-square144x144logo');
-		$pinned8_wide310x150logo = $site_root.$params->get('pinned8-wide310x150logo');
-		$pinned8_square310x310logo = $site_root.$params->get('pinned8-square310x310logo');
-		$pinned8_linksrss = $params->get('pinned8-linksrss');		
-		$opensearch_url = $params->get('URL-OpenSearch');		
-		$sitemap_url = $params->get('URL-Sitemap');		
-		$pinned8_badgebrowser = $params->get('pinned8_badgebrowser');		
-		$pinned8_IEconfig = $params->get('pinned8_IEconfig');		
-		$doYouHave_AffilateApple = $params->get('doYouHave_AffilateApple');
-		$myAccountGoogleplus = $params->get('myAccountGoogleplus');
-		$hitparadidsite = $params->get('hitparad-id-site');
-		$viglink_idsite = $params->get('viglink_idsite');
-		$nospartenaires_backlink = $params->get('nospartenaires_backlink');
-		$lxwfr_backlink = $params->get('lxwfr_backlink');
-		$plazoo_backlink = $params->get('plazoo_backlink');
-		$oobdoo_backlink = $params->get('oobdoo_backlink');
-		$quantcast_backlink = $params->get('quantcast_backlink');
-		$AddShoppers_backlink = $params->get('AddShoppers_backlink');
-		$thumbshots_backlink = $params->get('thumbshots_backlink');
-		$activesearchresults_backlink = $params->get('activesearchresults_backlink');
-		$APPID_webstoreGoogle = $params->get('APPID_webstoreGoogle');
-		$Pingback_url = $params->get('Pingback_url');
-		$pagerank_url = $params->get('pagerank_url');
-		$hebdotop_idsite = $params->get('hebdotop_idsite');
-		
-		/**Mesure d'audiance***/
-		$num_s_xiti = $params->get('xiti-s');		
-		$shareaholicsite_shareablepage = $params->get('shareaholicsite-shareable_page');		
-		$shareaholicsite_analytics = $params->get('shareaholicsite-analytics');		
 		/**json LD ordganisation***/
 		$JsonLD_organisation_legalName = $params->get('JsonLD-organisation-legalName');	
 		$JsonLD_organisation_founder = $params->get('JsonLD-organisation-founder');	
@@ -218,11 +98,6 @@ defined('_JEXEC') or die;
 		$JsonLD_person_faxNumber = $params->get('JsonLD-person-faxNumber');	
 		$JsonLD_person_telephone = $params->get('JsonLD-person-telephone');	
 		$JsonLD_person_gender = $params->get('JsonLD-person-gender');	
-		/*piwik*/		
-		$show_piwik = $params->get('show_piwik');
-		$urldomain_piwik_interne = $params->get('url-piwik');
-		$idsite_piwik = $params->get('site-id-piwik');
-		$setCookieDomain_piwik = $params->get('setCookieDomain-piwik');
 		/*Twitter theme*/
 		$Twitterwidgettheme  = $params->get('twitterwidgettheme');
 		$TwitterWthemelink  = $params->get('twitterwidgetthemelink');
