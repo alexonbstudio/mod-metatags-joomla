@@ -11,6 +11,9 @@
  
 defined('_JEXEC') or die;
 
+#use Joomla\CMS\Router\Route;
+#use Joomla\Module\Finder\Site\Helper\FinderHelper;
+
 if(!empty($robots)){
 	$docs->setMetaData('robots', $robots);
 	$docs->setMetaData('googlebot', $robots.', max-snippet:-1, max-image-preview:large, max-video-preview:-1');
@@ -21,7 +24,7 @@ if(!empty($twitter_user)){
 	$docs->setMetaData('twitter:site', '@'.$twitter_user);
 	$docs->setMetaData('twitter:card', $twitter_card);
 	$docs->setMetaData('twitter:title', $sitename.' - '.$title);
-	$docs->setMetaData('twitter:domain', $_SERVER['SERVER_NAME']);
+	$docs->setMetaData('twitter:domain', preg_replace('/www./i', '', $_SERVER['SERVER_NAME']));
 	$docs->setMetaData('twitter:image:src', $logo);
 	$docs->setMetaData('twitter:description', $desciption);
 }
@@ -39,6 +42,13 @@ $docs->setMetaData('og:site_name', $sitename, 'property');
 $docs->setMetaData('og:url', $current, 'property');
 $docs->setMetaData('og:title', $sitename.' - '.$title, 'property');
 $docs->setMetaData('og:type', $og_type, 'property');
+
+if($og_type == 'article'){
+	
+	$mod_metatags_arrays_articles = explode(' ',str_replace(',', '', $Keyword));
+	foreach ($mod_metatags_arrays_articles as $ArrMTTagsArtcles) { $docs->setMetaData('article:tag', htmlentities($ArrMTTagsArtcles), 'property'); }
+
+}
 $docs->setMetaData('og:description', $desciption, 'property');
 $docs->setMetaData('og:image', $logo, 'property');
 $docs->setMetaData('og:locale', $language, 'property');
@@ -60,7 +70,7 @@ if(!empty($fb_app_id)){
 
 /*************** Analystic & Marketing***********************/
 if(!empty($g_analytics)){
-	$docs->addCustomTag(  '<!-- Global site tag (gtag.js) - Google Analytics -->
+	$docs->addCustomTag('<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id='.$g_analytics.'"></script>
 		<script>
 		  window.dataLayer = window.dataLayer || [];
@@ -72,7 +82,7 @@ if(!empty($g_analytics)){
 }
 
 if(!empty($g_tagmanger)){
-	$docs->addCustomTag(  '<!-- Google Tag Manager -->
+	$docs->addCustomTag('<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({\'gtm.start\':
 	new Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!=\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=
@@ -86,17 +96,17 @@ if(!empty($g_tagmanger)){
 }
 
 if(!empty($yx_analytics)){
-	$docs->addCustomTag(  '<!-- Yandex.Metrika counter --> 
+	$docs->addCustomTag('<!-- Yandex.Metrika counter --> 
 	<script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym"); ym('.$yx_analytics.', "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/'.$yx_analytics.'" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
 	<!-- /Yandex.Metrika counter -->');
 }
 
 if(!empty($g_adsense)){
-	$docs->addCustomTag(  '<script data-ad-client="'.$g_adsense.'" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
+	$docs->addCustomTag('<script data-ad-client="'.$g_adsense.'" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
 }
 
 if(!empty($m_33across)){
-	$docs->addCustomTag( '<!-- Begin 33Across RevCTRL InView -->
+	$docs->addCustomTag('<!-- Begin 33Across RevCTRL InView -->
 		<script>
 		var Tynt=Tynt||[];Tynt.push(\''.$m_33across.'\');
 		Tynt.cmd=Tynt.cmd||[];Tynt.cmd.push(function(){
@@ -119,7 +129,7 @@ if(!empty($m_33across)){
 }
 
 if(!empty($m_awin)){
-	$docs->addCustomTag( '<script src="https://www.dwin2.com/pub.'.$m_awin.'.min.js"></script>');
+	$docs->addCustomTag('<script src="https://www.dwin2.com/pub.'.$m_awin.'.min.js"></script>');
 }
 
 if(!empty($m_uiz)){
@@ -318,7 +328,7 @@ if(!empty($s_addthis)){
 }
 
 /*********************[ AUTRES (Front-End Output Show) ]************************/
-if(!empty($head_script_frontend )){ $docs->addCustomTag($head_script_frontend );}
+if(!empty($head_script_frontend )){ $docs->addCustomTag($head_script_frontend); }
 if(!empty($footer_script_frontend)){ echo $footer_script_frontend; }
 
 /*********************[ Chatbot ]************************/
@@ -336,17 +346,137 @@ if(!empty($jld_type)){
 	{
 		"@context": "https://schema.org",
 		"@type": "WebPage",
-		"@id": "#'.$jld_type.'",
+		"@id": "#webpage",
 		"url": "'.$current.'",
 		"name":"'.$sitename.'",
 		"description":"'.htmlentities($description).'",
 		"headline": "'.htmlentities($title).',
-		"inLanguage":"'.$sitename.' - '.$language.'",
+		"inLanguage":"'.$language.'",
 		"image": [
 		  "'.$logo.'"
 		 ]
 	}
-	</script>';
+	</script>');
 }
 
-?>
+/*
+    <script type="application/ld+json">
+[{
+    "@context": "https://schema.org",
+	"@type": "WebPage",
+	"@id": "#webpage",
+	"url": "'.$current.'",
+	"name":"'.$sitename.'",
+	"description":"'.htmlentities($description).'",
+    "headline": "'.$sitename.' - '.htmlentities($title).'",
+	"inLanguage":"'.$language.'",
+    "image": [
+      "'.$logo.'"
+     ],
+     "speakable":
+     {
+      "@type": "SpeakableSpecification",
+      "xpath": [
+        "/html/head/title",
+        "/html/head/meta[@name=\'description\']/@content"
+        ]
+      },
+	"potentialAction":[
+		{
+			"@type":"ReadAction",
+			"target":[
+				"'.$current.'"
+			]
+		}
+	]
+	
+}, 
+{
+	"@type":"WebSite",
+	"@id":"#website",
+	"url":"'.$current.'",
+	"name":"'.$sitename.'",
+	"description":"'.htmlentities($description).'",
+	"inLanguage":"'.$language.'",
+	"potentialAction": {
+		"@type": "SearchAction",
+		"target": ".Route::_($this->query->toUri()).'?q={search_term}",
+		"query-input": "required name=search_term"
+	} 
+},
+{
+	"@type":"BreadcrumbList",
+	"@id":"#breadcrumb",
+	"itemListElement":[
+		{
+			"@type":"ListItem",
+			"position":1,
+			"item":{
+				"@type":"WebPage",
+				"@id":"<?php echo $protocols.'://'.$domainTLD; ?>",
+				"url":"<?php echo $protocols.'://'.$domainTLD; ?>",
+				"name":"<?php echo htmlentities($general['index']['title']); ?>"
+			}
+		},
+		{
+			"@type":"ListItem",
+			"position":2,
+			"item":{
+				"@type":"WebPage",
+				"@id":"<?php echo $protocols.'://'.$domainTLD.'/'.$urls; ?>",
+				"url":"<?php echo $protocols.'://'.$domainTLD.'/'.$urls; ?>",
+				"name":"<?php echo htmlentities($title); ?>"
+			}
+		}
+	]
+},
+{
+	"@type":"ImageObject",
+	"@id":"#primaryimage",
+	"inLanguage":"'.$language.'",
+	"url":"'.$current.'",
+	"width":718,
+	"height":403,
+	"caption":"'.$title.'"
+},
+{
+	"@context": "https://schema.org",
+	"@type": "'.jld-type.'",
+	"url": "'.$current.'<?php if(!empty($business['local']['phone']['number'])){ ?>,
+	"telephone": "<?php echo $business['local']['phone']['code']; ?><?php echo $business['local']['phone']['number']; ?>"<?php } ?>,
+	"logo": "'.$logo.'",
+	"name": "<?php echo htmlentities($business['local']['name']); ?>",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "<?php echo htmlentities($business['local']['address']); ?>",
+		"addressLocality": "<?php echo htmlentities($business['local']['city']); ?>",
+		<?php if(!empty($business['local']['region'])){ ?>"addressRegion": "<?php echo htmlentities($business['local']['region']).','; ?>"<?php } ?>
+		"postalCode": "<?php echo $business['local']['postal']; ?>",
+		"addressCountry": "<?php echo htmlentities($business['local']['contry']); ?>"
+	},
+	"geo": {
+		"@type": "GeoCoordinates",
+		"latitude": <?php echo $business['local']['geo']['latitude']; ?>,
+		"longitude": <?php echo $business['local']['geo']['longitude']; ?>
+	},
+	"sameAs":[
+		<?php if(!empty($social['twitter']['name'])){ echo '"'.$social['twitter']['url'].'",'; } ?>
+		<?php if(!empty($social['dailymotion']['name'])){ echo '"'.$social['facebook']['url'].'",'; } ?>
+		<?php if(!empty($social['facebook']['name'])){ echo '"'.$social['instagram']['url'].'",'; } ?> 
+		<?php if(!empty($social['linkedin']['team']['name'])){ echo '"'.$social['linkedin']['team']['url'].'",'; } ?>
+		<?php if(!empty($social['youtube']['name'])){ echo '"'.$social['youtube']['url'].'",'; } ?>
+		<?php if(!empty($social['twitch']['name'])){ echo '"'.$social['twitch']['url'].'",'; } ?>
+		<?php if(!empty($social['github']['name'])){ echo '"'.$social['github']['url'].'",'; } ?>
+		<?php if(!empty($social['discord']['name'])){ echo '"'.$social['discord']['url'].'",'; } ?>
+		<?php if(!empty($social['viadeo']['team']['name'])){ echo '"'.$social['viadeo']['team']['url'].'",'; } ?>
+		<?php if(!empty($social['mixcloud']['name'])){ echo '"'.$social['mixcloud']['url'].'",'; } ?>
+		<?php if(!empty($social['dailymotion']['name'])){ echo '"'.$social['dailymotion']['url'].'",'; } ?>
+		<?php if(!empty($private['name'])){ echo '"'.htmlentities($private['name']).'",'; } ?>
+		"'.$sitesname.'
+	]
+}<?php } ?>]
+
+    </script>
+	
+	*/
+?>	

@@ -18,6 +18,8 @@ use Joomla\CMS\Document;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language;
 use Joomla\CMS\User;
+#use Joomla\Component\Finder\Administrator\Indexer\Query;
+#use Joomla\Utilities\ArrayHelper;
 
 #GET LIBS
 $apps = Factory::getApplication();
