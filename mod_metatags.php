@@ -3,10 +3,11 @@
  * @package	Module for Joomla!
  * @subpackage  mod_metatags
  * @version	4.3
- * @author	AlexonBalangue.me
- * @copyright	(C) 2012-2019 Alexon Balangue. All rights reserved.
+ * @author	Alexon Balangue
+ * @copyright	(C) 2012-2020 Alexonbstudio. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
+ 
 
 defined('_JEXEC') or die;
 
@@ -45,10 +46,44 @@ $language_DOWN  = substr($language_FULL, 0, 2);
 $language_UP  = substr($language_FULL, 3, 4); 
 
 # Get params XML
-$robots   = $params->get('robots');
-$logo   = $params->get('logo');
-$twitter_card   = $params->get('twitter-card');
-$twitter_user   = $params->get('twitter-user');
+$robots = $params->get('robots');
+$logo = $params->get('logo');
+
+#Twitter Card
+$twitter_card = $params->get('twitter-card');
+$twitter_user = $params->get('twitter-user');
+
+# Open Graph
+$fb_admins = $params->get('fb-admins');
+$fb_app_id = $params->get('fb-app-id');
+$fb_profils_id = $params->get('fb-profils-id');
+$og_type = $params->get('og-type');
+
+# Analystic & Marketing 
+$g_tagmanger = $params->get('g-tagmanger');
+$g_analytics = $params->get('g-analytics');
+$g_adsense = $params->get('g-adsense');
+$yx_analytics = $params->get('yx-analytics');
+$m_33across = $params->get('m-33across');
+$m_awin = $params->get('m-awin');
+$m_uiz = $params->get('m-uiz');
+$m_quantcast = $params->get('m-quantcast');
+
+# Shares buttin
+$s_shareaholic = $params->get('m-shareaholic');
+$s_addthis = $params->get('s-addthis');
+
+# Add more script
+$head_script_frontend = $params->get('head-script-frontend');
+$footer_script_frontend = $params->get('footer-script-frontend');
+
+# Chatbot
+$crisp = $params->get('crisp');
+$tidio = $params->get('tidio');
+
+# Json-LD
+
+
 
 
 		
