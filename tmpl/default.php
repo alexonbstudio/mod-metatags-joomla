@@ -24,14 +24,15 @@ if(!empty($twitter_user)){
 	$docs->setMetaData('twitter:domain', $_SERVER['SERVER_NAME']);
 	$docs->setMetaData('twitter:image:src', $logo);
 	$docs->setMetaData('twitter:description', $desciption);
-} else {
+}
+/* else {
 	$docs->setMetaData('twitter:site', '@'.$auteur);
 	$docs->setMetaData('twitter:card', $twitter_card);
 	$docs->setMetaData('twitter:title', $sitename.' - '.$title);
 	$docs->setMetaData('twitter:domain', $_SERVER['SERVER_NAME']);
 	$docs->setMetaData('twitter:image:src', $logo);
 	$docs->setMetaData('twitter:description', $desciption);
-}
+}*/
 
 /***************Facebook & Open Graph***********************/
 $docs->setMetaData('og:site_name', $sitename, 'property');
@@ -40,7 +41,7 @@ $docs->setMetaData('og:title', $sitename.' - '.$title, 'property');
 $docs->setMetaData('og:type', $og_type, 'property');
 $docs->setMetaData('og:description', $desciption, 'property');
 $docs->setMetaData('og:image', $logo, 'property');
-$docs->setMetaData('og:locale', $$language_DOWN.'_'.$language_UP, 'property');
+$docs->setMetaData('og:locale', $language, 'property');
 
 if(!empty($fb_admins)){
 	$docs->setMetaData('og:admins', $fb_admins, 'property');
@@ -86,7 +87,7 @@ if(!empty($g_tagmanger)){
 
 if(!empty($yx_analytics)){
 	$docs->addCustomTag(  '<!-- Yandex.Metrika counter --> 
-	<script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym"); ym('.$seo['yandex']['analystics'].', "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/'.$yx_analytics.'" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
+	<script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym"); ym('.$yx_analytics.', "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/'.$yx_analytics.'" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
 	<!-- /Yandex.Metrika counter -->');
 }
 
@@ -300,20 +301,20 @@ if(!empty($m_quantcast)){
 /*********************[ Shares button ]************************/
 if(!empty($s_shareaholic)){
 	$docs->addCustomTag('<!-- BEGIN SHAREAHOLIC CODE -->
-	<link rel="preload" href="https://cdn.shareaholic.net/assets/pub/shareaholic.js" as="script" />';
+	<link rel="preload" href="https://cdn.shareaholic.net/assets/pub/shareaholic.js" as="script" />');
 	$docs->setMetaData('shareaholic:site_name', $sitename);
 	$docs->setMetaData('shareaholic:title', $sitename.' - '.$title);
 	$docs->setMetaData('shareaholic:site_id', $s_shareaholic);
 	$docs->setMetaData('shareaholic:keywords', htmlentities($Keyword));
 	$docs->setMetaData('shareaholic:image', $logo);
-	$docs->setMetaData('shareaholic:language', $$language_DOWN);
+	$docs->setMetaData('shareaholic:language', $language);
 	$docs->addCustomTag('<script data-cfasync="false" async src="https://cdn.shareaholic.net/assets/pub/shareaholic.js"></script>
 	<!-- END SHAREAHOLIC CODE -->');
 }
 
 if(!empty($s_addthis)){
-	$docs->addCustomTag('<!-- Go to www.addthis.com/dashboard to customize your tools -->
-	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid='.$s_addthis.'"></script>');
+	echo '<!-- Go to www.addthis.com/dashboard to customize your tools -->
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid='.$s_addthis.'"></script>';
 }
 
 /*********************[ AUTRES (Front-End Output Show) ]************************/

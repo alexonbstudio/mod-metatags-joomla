@@ -41,10 +41,6 @@ $Keyword = htmlspecialchars($configs->get('MetaKeys'), ENT_COMPAT, 'UTF-8');
 $desciption = htmlspecialchars($docs->getDescription(), ENT_COMPAT, 'UTF-8');
 $language  = $langs->getTag(); #$language_FULL  = $docs->language; 
 
-#More function
-$language_DOWN  = substr($language_FULL, 0, 2); 
-$language_UP  = substr($language_FULL, 3, 4); 
-
 # Get params XML
 $robots = $params->get('robots');
 $logo = $params->get('logo');
