@@ -8,7 +8,6 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
  
-
 defined('_JEXEC') or die;
 
 #USING
@@ -21,7 +20,6 @@ use Joomla\CMS\Language;
 use Joomla\CMS\User;
 
 #GET LIBS
-
 $apps = Factory::getApplication();
 $docs = Factory::getDocument();
 $configs = Factory::getConfig();
@@ -78,10 +76,6 @@ $crisp = $params->get('crisp');
 $tidio = $params->get('tidio');
 
 # Json-LD
+$jld_type = $params->get('jld-type');
 
-
-
-
-		
-		
 require ModuleHelper::getLayoutPath('mod_metatags', $params->get('layout', 'default'));

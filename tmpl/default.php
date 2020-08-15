@@ -331,7 +331,22 @@ if(!empty($tidio)){
 }
 
 /*********************[ Json-LD ]************************/
-/*********************[ PENDING ]************************/
-
+if(!empty($jld_type)){ 
+	$docs->addCustomTag('<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		"@id": "#'.$jld_type.'",
+		"url": "'.$current.'",
+		"name":"'.$sitename.'",
+		"description":"'.htmlentities($description).'",
+		"headline": "'.htmlentities($title).',
+		"inLanguage":"'.$sitename.' - '.$language.'",
+		"image": [
+		  "'.$logo.'"
+		 ]
+	}
+	</script>';
+}
 
 ?>
