@@ -2,7 +2,7 @@
 /**
  * @package	Module for Joomla!
  * @subpackage  mod_metatags
- * @version	4.3.1
+ * @version	4.3.2
  * @author	Alexon Balangue
  * @copyright	(C) 2012-2020 Alexonbstudio. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -79,5 +79,6 @@ $tidio = $params->get('tidio');
 
 # Json-LD
 $jld_type = $params->get('jld-type');
+$$jld_socialURL = $params->get('jld-socialURL');
 
 require ModuleHelper::getLayoutPath('mod_metatags', $params->get('layout', 'default'));

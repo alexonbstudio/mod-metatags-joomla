@@ -3,7 +3,7 @@
 /**
  * @package	Module for Joomla!
  * @subpackage  mod_metatags
- * @version	4.3.1
+ * @version	4.3.2
  * @author	Alexon Balangue
  * @copyright	(C) 2012-2020 Alexonbstudio. All rights reserved.
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,7 +24,7 @@ if(!empty($twitter_user)){
 	$docs->setMetaData('twitter:site', '@'.$twitter_user);
 	$docs->setMetaData('twitter:card', $twitter_card);
 	$docs->setMetaData('twitter:title', $sitename.' - '.$title);
-	$docs->setMetaData('twitter:domain', preg_replace('/www./i', '', $_SERVER['SERVER_NAME']));
+	$docs->setMetaData('twitter:domain', preg_replace('/www./i', '', $base));
 	$docs->setMetaData('twitter:image:src', $logo);
 	$docs->setMetaData('twitter:description', $desciption);
 }
@@ -341,9 +341,9 @@ if(!empty($tidio)){
 }
 
 /*********************[ Json-LD ]************************/
-if(!empty($jld_type)){ 
+
 	$docs->addCustomTag('<script type="application/ld+json">
-	{
+	[{
 		"@context": "https://schema.org",
 		"@type": "WebPage",
 		"@id": "#webpage",
@@ -354,129 +354,57 @@ if(!empty($jld_type)){
 		"inLanguage":"'.$language.'",
 		"image": [
 		  "'.$logo.'"
-		 ]
-	}
-	</script>');
-}
-
-/*
-    <script type="application/ld+json">
-[{
-    "@context": "https://schema.org",
-	"@type": "WebPage",
-	"@id": "#webpage",
-	"url": "'.$current.'",
-	"name":"'.$sitename.'",
-	"description":"'.htmlentities($description).'",
-    "headline": "'.$sitename.' - '.htmlentities($title).'",
-	"inLanguage":"'.$language.'",
-    "image": [
-      "'.$logo.'"
-     ],
-     "speakable":
-     {
-      "@type": "SpeakableSpecification",
-      "xpath": [
-        "/html/head/title",
-        "/html/head/meta[@name=\'description\']/@content"
-        ]
-      },
-	"potentialAction":[
+		],
+		"speakable":
 		{
-			"@type":"ReadAction",
-			"target":[
-				"'.$current.'"
+			"@type": "SpeakableSpecification",
+			"xpath": [
+				"/html/head/title",
+				"/html/head/meta[@name=\'description\']/@content"
 			]
-		}
-	]
-	
-}, 
-{
-	"@type":"WebSite",
-	"@id":"#website",
-	"url":"'.$current.'",
-	"name":"'.$sitename.'",
-	"description":"'.htmlentities($description).'",
-	"inLanguage":"'.$language.'",
-	"potentialAction": {
-		"@type": "SearchAction",
-		"target": ".Route::_($this->query->toUri()).'?q={search_term}",
-		"query-input": "required name=search_term"
-	} 
-},
-{
-	"@type":"BreadcrumbList",
-	"@id":"#breadcrumb",
-	"itemListElement":[
-		{
-			"@type":"ListItem",
-			"position":1,
-			"item":{
-				"@type":"WebPage",
-				"@id":"<?php echo $protocols.'://'.$domainTLD; ?>",
-				"url":"<?php echo $protocols.'://'.$domainTLD; ?>",
-				"name":"<?php echo htmlentities($general['index']['title']); ?>"
-			}
 		},
-		{
-			"@type":"ListItem",
-			"position":2,
-			"item":{
-				"@type":"WebPage",
-				"@id":"<?php echo $protocols.'://'.$domainTLD.'/'.$urls; ?>",
-				"url":"<?php echo $protocols.'://'.$domainTLD.'/'.$urls; ?>",
-				"name":"<?php echo htmlentities($title); ?>"
+		"potentialAction":[
+			{
+				"@type":"ReadAction",
+				"target":[
+					"'.$current.'"
+				]
 			}
-		}
-	]
-},
-{
-	"@type":"ImageObject",
-	"@id":"#primaryimage",
-	"inLanguage":"'.$language.'",
-	"url":"'.$current.'",
-	"width":718,
-	"height":403,
-	"caption":"'.$title.'"
-},
-{
-	"@context": "https://schema.org",
-	"@type": "'.jld-type.'",
-	"url": "'.$current.'<?php if(!empty($business['local']['phone']['number'])){ ?>,
-	"telephone": "<?php echo $business['local']['phone']['code']; ?><?php echo $business['local']['phone']['number']; ?>"<?php } ?>,
-	"logo": "'.$logo.'",
-	"name": "<?php echo htmlentities($business['local']['name']); ?>",
-	"address": {
-		"@type": "PostalAddress",
-		"streetAddress": "<?php echo htmlentities($business['local']['address']); ?>",
-		"addressLocality": "<?php echo htmlentities($business['local']['city']); ?>",
-		<?php if(!empty($business['local']['region'])){ ?>"addressRegion": "<?php echo htmlentities($business['local']['region']).','; ?>"<?php } ?>
-		"postalCode": "<?php echo $business['local']['postal']; ?>",
-		"addressCountry": "<?php echo htmlentities($business['local']['contry']); ?>"
+		]
 	},
-	"geo": {
-		"@type": "GeoCoordinates",
-		"latitude": <?php echo $business['local']['geo']['latitude']; ?>,
-		"longitude": <?php echo $business['local']['geo']['longitude']; ?>
+	{
+		"@type":"ImageObject",
+		"@id":"#primaryimage",
+		"inLanguage":"'.$language.'",
+		"url":"'.$current.'",
+		"width":718,
+		"height":403,
+		"caption":"'.$title.'"
 	},
-	"sameAs":[
-		<?php if(!empty($social['twitter']['name'])){ echo '"'.$social['twitter']['url'].'",'; } ?>
-		<?php if(!empty($social['dailymotion']['name'])){ echo '"'.$social['facebook']['url'].'",'; } ?>
-		<?php if(!empty($social['facebook']['name'])){ echo '"'.$social['instagram']['url'].'",'; } ?> 
-		<?php if(!empty($social['linkedin']['team']['name'])){ echo '"'.$social['linkedin']['team']['url'].'",'; } ?>
-		<?php if(!empty($social['youtube']['name'])){ echo '"'.$social['youtube']['url'].'",'; } ?>
-		<?php if(!empty($social['twitch']['name'])){ echo '"'.$social['twitch']['url'].'",'; } ?>
-		<?php if(!empty($social['github']['name'])){ echo '"'.$social['github']['url'].'",'; } ?>
-		<?php if(!empty($social['discord']['name'])){ echo '"'.$social['discord']['url'].'",'; } ?>
-		<?php if(!empty($social['viadeo']['team']['name'])){ echo '"'.$social['viadeo']['team']['url'].'",'; } ?>
-		<?php if(!empty($social['mixcloud']['name'])){ echo '"'.$social['mixcloud']['url'].'",'; } ?>
-		<?php if(!empty($social['dailymotion']['name'])){ echo '"'.$social['dailymotion']['url'].'",'; } ?>
-		<?php if(!empty($private['name'])){ echo '"'.htmlentities($private['name']).'",'; } ?>
-		"'.$sitesname.'
-	]
-}<?php } ?>]
+	{
+		"@type":"WebSite",
+		"@id":"#website",
+		"url":"'.$current.'",
+		"name":"'.$sitename.'",
+		"description":"'.htmlentities($description).'",
+		"inLanguage":"'.$language.'",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "'.$base.'index.php?option=com_finder&q={search_term}",
+			"query-input": "required name=search_term"
+		} 
+	},	
+	{
+		"@context": "https://schema.org",
+		"@type": "'.$jld_type.'",
+		"url": "'.$current.',
+		"logo": "'.$logo.'",
+		"name": "'.$sitename.'",
+		"sameAs":[
+			'.$jld_socialURL.'
+		]
+	}]
+	</script>');
 
-    </script>
-	
-	*/
+
 ?>	
