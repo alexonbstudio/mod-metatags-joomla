@@ -28,14 +28,7 @@ if(!empty($twitter_user)){
 	$docs->setMetaData('twitter:image:src', $logo);
 	$docs->setMetaData('twitter:description', $desciption);
 }
-/* else {
-	$docs->setMetaData('twitter:site', '@'.$auteur);
-	$docs->setMetaData('twitter:card', $twitter_card);
-	$docs->setMetaData('twitter:title', $sitename.' - '.$title);
-	$docs->setMetaData('twitter:domain', $_SERVER['SERVER_NAME']);
-	$docs->setMetaData('twitter:image:src', $logo);
-	$docs->setMetaData('twitter:description', $desciption);
-}*/
+
 
 /***************Facebook & Open Graph***********************/
 $docs->setMetaData('og:site_name', $sitename, 'property');
@@ -341,7 +334,10 @@ if(!empty($tidio)){
 }
 
 /*********************[ Json-LD ]************************/
-
+$jld_socialURLs = explode(' ',str_replace(',', '', $jld_socialURL));
+foreach ($jld_socialURLs as $arrayjld_socialURL) { 
+		$SameAsSocial = '"'.$arrayjld_socialURL.'", ';
+}
 	$docs->addCustomTag('<script type="application/ld+json">
 	[{
 		"@context": "https://schema.org",
@@ -401,7 +397,7 @@ if(!empty($tidio)){
 		"logo": "'.$logo.'",
 		"name": "'.$sitename.'",
 		"sameAs":[
-			'.$jld_socialURL.'
+			'.$SameAsSocial.'
 		]
 	}]
 	</script>');
